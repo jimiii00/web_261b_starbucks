@@ -1,221 +1,494 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starbucks</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100..900&family=Song+Myung&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinema UI</title>
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Noto Sans KR", sans-serif;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-        section {
-            position: relative;
-            width: 100%;
-            margin: 0 auto;
-            min-height: 100vh;
-            background-color: skyblue;
-            padding: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Noto Sans KR', sans-serif;
+}
 
-        header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        header .logo {
-            position: relative;
-            max-width: 80px;
-        }
+body{
+    transition:0.5s;
+}
 
-        header ul {
-            position: relative;
-            display: flex;
-        }
 
-        header ul li {
-            list-style: none;
-        }
+section{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    padding:80px 100px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    overflow:hidden;
+}
 
-        header ul li a {
-            display: inline-block;
-            color: #333;
-            font-weight: 400;
-            margin-left: 40px;
-            text-decoration: none; 
-        }
 
-        .content {
-            position: relative;
-            width: 100%; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.circle{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    z-index:1;
+    transition:0.5s;
+}
 
-        .content .textBox {
-            position: relative;
-            max-width: 600px;
-        }
 
-        .content .textBox h2 {
-            color: #333;
-            font-size: 4em;
-            line-height: 1.4em;
-            font-weight: 500;
-        }
+header{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 100px;
+    display:flex;
+    justify-content:space-between;
+    z-index:10;
+}
 
-        .content .textBox h2 span {
-            color: #017143;
-            font-size: 1.2em;
-            font-weight: 900;
-        }
+.logo{
+    color:#fff;
+    font-weight:900;
+}
 
-        .content .textBox p {
-            color: #333;
-        }
+header ul{
+    display:flex;
+}
 
-        .content .textBox a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 8px 20px;
-            background: #017143;
-            color: #fff;
-            border-radius: 40px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
+header ul li{
+    list-style:none;
+}
 
-        .imgBox {
-            width: 600px;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 50px;
-            margin-top: 50px;
-        }
+header ul li a{
+    color:#fff;
+    margin-left:40px;
+    text-decoration:none;
+}
 
-        .imgBox img {
-            max-width: 340px;
-        }
 
-        
-        .thumb {
-            position: absolute;
-            left: 50%;
-            bottom: 20px;
-            transform: translateX(-50%);
-            display: flex;
-        }
+.content{
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+    position:relative;
+    z-index:2;
+}
 
-        .thumb li {
-            list-style: none;
-            display: inline-block;
-            margin: 0 20px;
-            cursor: pointer;
-            transition: 300ms;
-        }
 
-        .thumb li:hover {
-            transform: translateY(-15px);
-        }
+.textBox h2{
+    font-size:3.8em;
+    line-height:1.2;
+    color:#fff;
+}
 
-        .thumb li img {
-            max-width: 60px;
-        }
+.textBox span{
+    font-weight:900;
+}
 
-        .sci {
-            position: absolute;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+.textBox p{
+    color:#aaa;
+    margin-top:5px;
+}
 
-        .sci li {
-            list-style: none;
-        }
+.textBox a{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 25px;
+    background:#fff;
+    color:#111;
+    border-radius:40px;
+    text-decoration:none;
+}
 
-        .circle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #017143;
-            clip-path: circle(600px at right 800px);
-        }
 
-        .sci li img {
-            filter: invert(1); 
-            max-width: 26px;
-            margin: 5px 0;
-        }
+.imgBox{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:2;
+    pointer-events:none;
+    gap:14px;
+}
 
-    </style>
+.imgBox img{
+    position:relative;
+    z-index:2;
+    transition:0.5s;
+}
+
+
+.movie-title{
+    text-align:center;
+    transition:0.5s;
+}
+
+.movie-title .title-main{
+    font-size:1.05em;
+    font-weight:700;
+    color:#fff;
+    letter-spacing:0.02em;
+    display:block;
+}
+
+.movie-title .title-sub{
+    font-size:0.72em;
+    color:rgba(255,255,255,0.5);
+    margin-top:3px;
+    display:block;
+    letter-spacing:0.04em;
+}
+
+body.comedy .movie-title .title-main{
+    color:#222;
+}
+
+body.comedy .movie-title .title-sub{
+    color:rgba(0,0,0,0.4);
+}
+
+
+.rating-panel{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    z-index:3;
+    min-width:160px;
+}
+
+.rating-question{
+    color:#fff;
+    font-size:1em;
+    font-weight:600;
+    text-align:center;
+    line-height:1.5;
+    margin-bottom:4px;
+}
+
+.stars{
+    display:flex;
+    gap:8px;
+}
+
+.stars svg{
+    width:32px;
+    height:32px;
+    cursor:pointer;
+    transition:transform 0.15s;
+}
+
+.stars svg:hover{
+    transform:scale(1.2);
+}
+
+.star-path{
+    fill:none;
+    stroke:#fff;
+    stroke-width:1.5;
+    transition:fill 0.2s, stroke 0.2s;
+}
+
+.stars svg.hovered .star-path,
+.stars svg.selected .star-path{
+    fill:#FFD700;
+    stroke:#FFD700;
+}
+
+.rating-score{
+    color:#aaa;
+    font-size:0.8em;
+    min-height:18px;
+    transition:0.2s;
+}
+
+.imdb-badge{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:8px;
+    padding:8px 18px;
+    text-align:center;
+}
+
+.imdb-badge .imdb-label{
+    color:#aaa;
+    font-size:0.72em;
+    letter-spacing:0.1em;
+}
+
+.imdb-badge .imdb-val{
+    color:#fff;
+    font-size:1.3em;
+    font-weight:700;
+}
+
+.now-playing{
+    color:#aaa;
+    font-size:0.75em;
+    letter-spacing:0.08em;
+    text-align:center;
+}
+
+
+.thumb{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+}
+
+.thumb li{
+    list-style:none;
+    margin:0 25px;
+    cursor:pointer;
+}
+
+.thumb li img{
+    width:90px;
+    transition:0.3s;
+}
+
+.thumb li:hover img{
+    transform:translateY(-10px);
+}
+
+.thumb li.active img{
+    transform:scale(1.2);
+    border:2px solid #fff;
+    border-radius:10px;
+}
+
+
+body.action{
+    background:#000;
+}
+
+body.action .circle{
+    background:#6e0f1a;
+}
+
+body.action .imgBox img{
+    width:420px;
+    filter:contrast(130%) saturate(140%);
+}
+
+body.action .textBox span{
+    color:#ff2e2e;
+}
+
+
+body.comedy{
+    background:#f4f1ea;
+}
+
+body.comedy .circle{
+    background:#d6cfae;
+}
+
+body.comedy .textBox h2,
+body.comedy .textBox p{
+    color:#222;
+}
+
+body.comedy .rating-question{
+    color:#222;
+}
+
+body.comedy .stars .star-path{
+    stroke:#555;
+}
+
+body.comedy .rating-score{
+    color:#777;
+}
+
+body.comedy .imdb-badge .imdb-label{
+    color:#777;
+}
+
+body.comedy .imdb-badge .imdb-val{
+    color:#222;
+}
+
+body.comedy .now-playing{
+    color:#777;
+}
+
+body.comedy .imgBox img{
+    width:460px;
+    filter:saturate(110%) brightness(105%);
+}
+
+
+body.romance{
+    background:#1a001a;
+}
+
+body.romance .circle{
+    background:#b04a6f;
+    opacity:0.6;
+    filter:blur(60px);
+}
+
+body.romance .imgBox img{
+    width:480px;
+    filter:brightness(110%) blur(1px);
+}
+
+body.romance .textBox span{
+    color:#ff7aa8;
+}
+</style>
 </head>
-<body>
-    <section>
-        <div class="circle"></div>
-        <header>
-            <a href="#" class="logo"><img src="./imgs/logo.png" alt="logo"></a>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">What's New</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </header>
-        
-        <div class="content">
-    <div class="textBox">
-        <h2>It's not just Coffee<br>It's <span>Starbucks</span></h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis culpa eam, soluta ab placeat.</p>
-        <a href="#">Learn More</a>
+
+<body class="action">
+
+<section>
+
+    <div class="circle"></div>
+
+    <header>
+        <div class="logo">🎬 ACTION</div>
+        <ul>
+            <li><a href="#">Now Showing</a></li>
+            <li><a href="#">Genres</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </header>
+
+    <div class="content">
+
+        <div class="textBox">
+            <h2>폭발하는<br><span>한 장면</span></h2>
+            <p>극도의 긴장감. 빠른 편집. 순수한 아드레날린.</p>
+            <a href="#">Watch Now</a>
+        </div>
+
+
+        <div class="imgBox">
+            <div class="movie-title">
+                <span class="title-main">내일을 향해 쏴라</span>
+                <span class="title-sub">1970 · 조지 로이 힐</span>
+            </div>
+            <img src="./imgs/action.png" class="poster">
+        </div>
+
+
+        <div class="rating-panel">
+            <div class="rating-question">영화를 보셨나요?</div>
+            <div class="stars" id="stars">
+                <svg viewBox="0 0 24 24" data-index="1">
+                    <path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <svg viewBox="0 0 24 24" data-index="2">
+                    <path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <svg viewBox="0 0 24 24" data-index="3">
+                    <path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <svg viewBox="0 0 24 24" data-index="4">
+                    <path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <svg viewBox="0 0 24 24" data-index="5">
+                    <path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </div>
+            <div class="rating-score" id="ratingScore"></div>
+            <div class="imdb-badge">
+                <div class="imdb-label">IMDB</div>
+                <div class="imdb-val">8.5</div>
+            </div>
+            <div class="now-playing">Now Playing</div>
+        </div>
+
     </div>
 
-    <div class="imgBox">
-        <img src="./imgs/img1.png" alt="" class="starbucks">
-    </div>
-</div>
+    <ul class="thumb">
+        <li class="active" onclick="setGenre(event,'action','./imgs/action.png','폭발하는<br><span>한 장면</span>','극도의 긴장감. 빠른 편집. 순수한 아드레날린.')">
+            <img src="./imgs/action.png">
+        </li>
+        <li onclick="setGenre(event,'comedy','./imgs/comedy.png','예측 불가한<br><span>웃음</span>','엉뚱한 순간들, 가볍고 리듬감 있는 전개.')">
+            <img src="./imgs/comedy.png">
+        </li>
+        <li onclick="setGenre(event,'romance','./imgs/romance.png','마음에 남는<br><span>사랑</span>','따뜻한 순간들, 잔잔하게 깊어지는 감정.')">
+            <img src="./imgs/romance.png">
+        </li>
+    </ul>
 
-<ul class="thumb">
-    <li><img src="./imgs/thumb1.png" alt="" onclick="imgSlider('./imgs/img1.png');changeCircleColor('#017143')"></li>
-    <li><img src="./imgs/thumb2.png" alt="" onclick="imgSlider('./imgs/img2.png');changeCircleColor('#eb7495')"></li>
-    <li><img src="./imgs/thumb3.png" alt="" onclick="imgSlider('./imgs/img3.png');changeCircleColor('#d752b1')"></li>
-</ul>
-
-<ul class="sci">
-    <li><a href="#"><img src="./imgs/facebook.png" alt=""></a></li>
-    <li><a href="#"><img src="./imgs/twitter.png" alt=""></a></li>
-    <li><a href="#"><img src="./imgs/instagram.png" alt=""></a></li>
-</ul>
+</section>
 
 <script>
-    function imgSlider(anything){
-        document.querySelector('.starbucks').src = anything;
-    }
+const starsEl = document.querySelectorAll('#stars svg');
+const scoreEl = document.getElementById('ratingScore');
+const labels = ['', '별로예요', '그저 그래요', '좋았어요', '훌륭해요', '최고예요!'];
+let selected = 0;
 
-    function changeCircleColor(color){
-        const circle = document.querySelector('.circle');
-        circle.style.background = color;
-    }
+starsEl.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+        const idx = parseInt(star.dataset.index);
+        starsEl.forEach(s => {
+            s.classList.toggle('hovered', parseInt(s.dataset.index) <= idx);
+            s.classList.remove('selected');
+        });
+        scoreEl.textContent = labels[idx];
+    });
+
+    star.addEventListener('click', () => {
+        selected = parseInt(star.dataset.index);
+        starsEl.forEach(s => {
+            s.classList.toggle('selected', parseInt(s.dataset.index) <= selected);
+            s.classList.remove('hovered');
+        });
+        scoreEl.textContent = labels[selected];
+    });
+});
+
+document.getElementById('stars').addEventListener('mouseleave', () => {
+    starsEl.forEach(s => {
+        s.classList.remove('hovered');
+        s.classList.toggle('selected', parseInt(s.dataset.index) <= selected);
+    });
+    scoreEl.textContent = selected ? labels[selected] : '';
+});
+
+const movieTitles = {
+    action:  { main: '내일을 향해 쏴라',       sub: '1970 · 조지 로이 힐' },
+    comedy:  { main: '미스터 빈의 홀리데이',    sub: '2007 · 스티븐 벤디렉' },
+    romance: { main: '어바웃 타임',             sub: '2014 · 리처드 커티스' }
+};
+
+function setGenre(e, genre, img, title, desc) {
+    document.body.className = genre;
+    document.querySelector('.poster').src = img;
+    document.querySelector('.textBox h2').innerHTML = title;
+    document.querySelector('.textBox p').innerText = desc;
+    document.querySelector('.logo').innerText = '🎬 ' + genre.toUpperCase();
+    document.querySelectorAll('.thumb li').forEach(li => li.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    selected = 0;
+    starsEl.forEach(s => s.classList.remove('selected', 'hovered'));
+    scoreEl.textContent = '';
+    document.querySelector('.movie-title .title-main').textContent = movieTitles[genre].main;
+    document.querySelector('.movie-title .title-sub').textContent  = movieTitles[genre].sub;
+}
 </script>
+
+</body>
+</html>
