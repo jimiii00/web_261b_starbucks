@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cinema UI</title>
+<title>영화가 세상을 바꾼다</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
@@ -19,7 +19,6 @@ body{
     transition:0.5s;
 }
 
-
 section{
     position:relative;
     width:100%;
@@ -30,7 +29,6 @@ section{
     justify-content:space-between;
     overflow:hidden;
 }
-
 
 .circle{
     position:absolute;
@@ -43,7 +41,6 @@ section{
     z-index:1;
     transition:0.5s;
 }
-
 
 header{
     position:absolute;
@@ -75,7 +72,6 @@ header ul li a{
     text-decoration:none;
 }
 
-
 .content{
     display:flex;
     width:100%;
@@ -85,7 +81,6 @@ header ul li a{
     position:relative;
     z-index:2;
 }
-
 
 .textBox h2{
     font-size:3.8em;
@@ -112,7 +107,6 @@ header ul li a{
     text-decoration:none;
 }
 
-
 .imgBox{
     position:absolute;
     left:50%;
@@ -131,7 +125,6 @@ header ul li a{
     z-index:2;
     transition:0.5s;
 }
-
 
 .movie-title{
     text-align:center;
@@ -161,7 +154,6 @@ body.comedy .movie-title .title-main{
 body.comedy .movie-title .title-sub{
     color:rgba(0,0,0,0.4);
 }
-
 
 .rating-panel{
     display:flex;
@@ -244,7 +236,6 @@ body.comedy .movie-title .title-sub{
     text-align:center;
 }
 
-
 .thumb{
     position:absolute;
     bottom:20px;
@@ -274,7 +265,7 @@ body.comedy .movie-title .title-sub{
     border-radius:10px;
 }
 
-
+/* ACTION */
 body.action{
     background:#000;
 }
@@ -288,11 +279,15 @@ body.action .imgBox img{
     filter:contrast(130%) saturate(140%);
 }
 
+body.action .movie-title{
+    margin-top:60px;
+}
+
 body.action .textBox span{
     color:#ff2e2e;
 }
 
-
+/* COMEDY */
 body.comedy{
     background:#f4f1ea;
 }
@@ -335,7 +330,7 @@ body.comedy .imgBox img{
     filter:saturate(110%) brightness(105%);
 }
 
-
+/* ROMANCE */
 body.romance{
     background:#1a001a;
 }
@@ -364,12 +359,12 @@ body.romance .textBox span{
     <div class="circle"></div>
 
     <header>
-        <div class="logo">🎬 ACTION</div>
+        <div class="logo">🤠💥 ACTION</div>
         <ul>
-            <li><a href="#">Now Showing</a></li>
-            <li><a href="#">Genres</a></li>
-            <li><a href="#">Reviews</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">현재 상영 중인 영화</a></li>
+            <li><a href="#">장르별 영화</a></li>
+            <li><a href="#">리뷰</a></li>
+            <li><a href="#">Contact Us</a></li>
         </ul>
     </header>
 
@@ -378,9 +373,8 @@ body.romance .textBox span{
         <div class="textBox">
             <h2>폭발하는<br><span>한 장면</span></h2>
             <p>극도의 긴장감. 빠른 편집. 순수한 아드레날린.</p>
-            <a href="#">Watch Now</a>
+            <a href="#">보러 가기</a>
         </div>
-
 
         <div class="imgBox">
             <div class="movie-title">
@@ -389,7 +383,6 @@ body.romance .textBox span{
             </div>
             <img src="./imgs/action.png" class="poster">
         </div>
-
 
         <div class="rating-panel">
             <div class="rating-question">영화를 보셨나요?</div>
@@ -415,7 +408,7 @@ body.romance .textBox span{
                 <div class="imdb-label">IMDB</div>
                 <div class="imdb-val">8.5</div>
             </div>
-            <div class="now-playing">Now Playing</div>
+            <div class="now-playing">절찬상영중</div>
         </div>
 
     </div>
@@ -425,10 +418,10 @@ body.romance .textBox span{
             <img src="./imgs/action.png">
         </li>
         <li onclick="setGenre(event,'comedy','./imgs/comedy.png','예측 불가한<br><span>웃음</span>','엉뚱한 순간들, 가볍고 리듬감 있는 전개.')">
-            <img src="./imgs/comedy.png">
+            <img src="./imgs/comedy.png" style="margin-top:20px;">
         </li>
         <li onclick="setGenre(event,'romance','./imgs/romance.png','마음에 남는<br><span>사랑</span>','따뜻한 순간들, 잔잔하게 깊어지는 감정.')">
-            <img src="./imgs/romance.png">
+            <img src="./imgs/romance.png" style="margin-top:20px;">
         </li>
     </ul>
 
@@ -468,10 +461,10 @@ document.getElementById('stars').addEventListener('mouseleave', () => {
     scoreEl.textContent = selected ? labels[selected] : '';
 });
 
-const movieTitles = {
-    action:  { main: '내일을 향해 쏴라',       sub: '1970 · 조지 로이 힐' },
-    comedy:  { main: '미스터 빈의 홀리데이',    sub: '2007 · 스티븐 벤디렉' },
-    romance: { main: '어바웃 타임',             sub: '2014 · 리처드 커티스' }
+const genreData = {
+    action:  { logo: '🤠💥 ACTION',  titleMain: '내일을 향해 쏴라',     titleSub: '1970 · 조지 로이 힐' },
+    comedy:  { logo: '😂🎭 COMEDY',  titleMain: '미스터 빈의 홀리데이', titleSub: '2007 · 스티븐 벤디렉' },
+    romance: { logo: '💕🌸 ROMANCE', titleMain: '어바웃 타임',           titleSub: '2014 · 리처드 커티스' }
 };
 
 function setGenre(e, genre, img, title, desc) {
@@ -479,14 +472,14 @@ function setGenre(e, genre, img, title, desc) {
     document.querySelector('.poster').src = img;
     document.querySelector('.textBox h2').innerHTML = title;
     document.querySelector('.textBox p').innerText = desc;
-    document.querySelector('.logo').innerText = '🎬 ' + genre.toUpperCase();
+    document.querySelector('.logo').textContent = genreData[genre].logo;
     document.querySelectorAll('.thumb li').forEach(li => li.classList.remove('active'));
     e.currentTarget.classList.add('active');
     selected = 0;
     starsEl.forEach(s => s.classList.remove('selected', 'hovered'));
     scoreEl.textContent = '';
-    document.querySelector('.movie-title .title-main').textContent = movieTitles[genre].main;
-    document.querySelector('.movie-title .title-sub').textContent  = movieTitles[genre].sub;
+    document.querySelector('.movie-title .title-main').textContent = genreData[genre].titleMain;
+    document.querySelector('.movie-title .title-sub').textContent  = genreData[genre].titleSub;
 }
 </script>
 
